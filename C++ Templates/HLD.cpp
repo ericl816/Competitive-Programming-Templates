@@ -54,7 +54,7 @@ public:
         tree[idx].l = l;
         tree[idx].r = r;
         if (l == r) {
-            tree[idx].val = arr[l];
+            tree[idx].val = p[l] * arr[l];
             return;
         }
         int mid = (l + r) >> 1;

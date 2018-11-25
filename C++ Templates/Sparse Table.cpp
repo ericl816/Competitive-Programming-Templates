@@ -18,6 +18,13 @@ using namespace std;
 
 // Using solution to Stogovi as code for template
 
+/* Let G be a tree. For every query of the form (u, v) we want to find the lowest common ancestor
+ * of the nodes u and v, i.e. we want to find a node w that lies on the path from u to the root node,
+ * that lies on the path from v to the root node, and if there are multiple nodes we pick the one that
+ * is farthest away from the root node. In other words the desired node w is the lowest ancestor of u and v.
+ * In particular if u is an ancestor of v, then u is their lowest common ancestor.
+ */
+
 int N, v, w, x, y, lca;
 int depth[MAXN], st[MAXN];
 int sparse[MAXN][MAXM];

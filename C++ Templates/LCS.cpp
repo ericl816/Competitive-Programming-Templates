@@ -24,22 +24,21 @@ using namespace std;
  * Use DP to get the Longest Common Subsequence
  * Overall Time Complexity: O(N*M)
  */
-int LCS (vi &a, vi &b) {
-	int n = a.size();
-	int m = b.size();
-	int DP[n + 1][m + 1];
-	for (int i=0; i<=n; i++) {
-		for (int j=0; j<=m; j++) {
+
+int DP[MAXN][MAXN];
+vi a, b;
+int n, m;
+
+inline int LCS () {
+	for (size_t i=0; i<=a.size(); i++) {
+		for (size_t j=0; j<=b.size(); j++) {
 			if (i == 0 || j == 0) DP[i][j] = 0;
 			else if (a[i - 1] == b[j - 1]) DP[i][j] = DP[i - 1][j - 1] + 1;
 			else DP[i][j] = max(DP[i - 1][j], DP[i][j - 1]);
 		}
 	}
-	return DP[n][m];
+	return DP[a.size()][b.size()];
 }
-
-vi a, b;
-int n, m;
 
 int main () {
 	#ifdef NOT_DMOJ

@@ -6,12 +6,14 @@
 #define scan(x) do{while((x=getchar_unlocked())<'0'); for(x-='0'; '0'<=(_=getchar_unlocked()); x=(x<<3)+(x<<1)+_-'0');}while(0)
 char _;
 #define ll long long
+#define ull unsigned long long
 #define MAXM 1010
 #define MAXN 5010
 #define INF 0x3f3f3f3f
 #define min(a, b) (a) < (b) ? (a) : (b)
 #define max(a, b) (a) < (b) ? (b) : (a)
 #define vi vector<int>
+#define vll vector<ll>
 #define pb push_back
 #define pii pair<int, int>
 #define mp make_pair
@@ -19,6 +21,7 @@ char _;
 #define s second
 #define mii map<int, int>
 #define umii unordered_map<int, int>
+#define DEBUG 1
 #ifdef DEBUG
 	#define D(x...) printf(x)
 #else

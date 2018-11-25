@@ -5,7 +5,7 @@
 #define scan(x) do{while((x=getchar_unlocked())<'0'); for(x-='0'; '0'<=(_=getchar_unlocked()); x=(x<<3)+(x<<1)+_-'0');}while(0)
 char _;
 #define ll long long
-#define MAXN 70010
+#define MAXN 100010
 #define INF 0x3f3f3f3f
 #define min(a, b) (a) < (b) ? (a) : (b)
 #define max(a, b) (a) < (b) ? (b) : (a)
@@ -21,7 +21,8 @@ using namespace std;
 
 int N;
 ll inv_count;
-ll tree[MAXN], A[MAXN], B[MAXN];
+ll tree[MAXN];
+int A[MAXN];
  
 inline void Update (int idx, int val) {
   for (idx; idx<=MAXN; idx += idx & -idx) tree[idx] += val;
@@ -41,20 +42,11 @@ int main () {
   cin.sync_with_stdio(0);
   cin.tie(0);
   cout.tie(0);
-  scanf("%d", &N);
-  for (int i=0; i<N; i++) {
-    scanf("%lld", &A[i]);
-    B[i] = A[i];
-  }
-  sort(B, B + N);
-  for (int i=0; i<N; i++) {
-    int rank = int(lower_bound(B, B + N, A[i]) - B);
-    A[i] = rank + 1;
-  }
+  cin >> N;
+  for (int i=0; i<N; i++) cin >> A[i];
   for (int i=N - 1; i>=0; i--) {
-    ll x = Query(A[i] - 1);
-    inv_count += x;
+    inv_count += Query(A[i]);
     Update(A[i], 1);
   }
-  return !printf("%lld\n", inv_count);
+  cout << inv_count << "\n";
 }

@@ -21,6 +21,7 @@ char _;
 using namespace std;
 
 // Sparse Table Approach
+// Uses Binary Lifting
 
 int N, Q, SIZE, minn;
 int arr[MAXN];
