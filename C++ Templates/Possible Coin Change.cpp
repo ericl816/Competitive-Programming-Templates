@@ -1,15 +1,13 @@
 #pragma GCC optimize "Ofast"
 #pragma GCC optimize "unroll-loops"
 #pragma GCC target "sse,sse2,sse3,sse4,abm,avx,mmx,popcnt,tune=native"
-// #include <bits/stdc++.h>
-#include "/Users/ericliu/Desktop/Competitive-Programming-Templates/stdc++.h"
+#include <bits/stdc++.h>
 #define scan(x) do{while((x=getchar_unlocked())<'0'); for(x-='0'; '0'<=(_=getchar_unlocked()); x=(x<<3)+(x<<1)+_-'0');}while(0)
 char _;
 #define ll long long
 #define ull unsigned long long
-#define MAXM 1010
-#define MAXN 5010
-#define MOD 1000000007
+#define MAXN 110
+#define MAXM 10010
 #define INF 0x3f3f3f3f
 #define min(a, b) (a) < (b) ? (a) : (b)
 #define max(a, b) (a) < (b) ? (b) : (a)
@@ -23,7 +21,6 @@ char _;
 #define mii map<int, int>
 #define umii unordered_map<int, int>
 #define DEBUG 1
-// #define NOT_DMOJ 0
 #ifdef DEBUG
 	#define D(x...) printf(x)
 #else
@@ -31,9 +28,19 @@ char _;
 #endif
 using namespace std;
 
-inline int GCD (int a, int b) { return b == 0 ? a : GCD(b, a % b); }
-inline int LCM (int a, int b) { return a * b / GCD(a, b); }
-inline ll PowMod (ll a, ll b, ll mod) { ll val = 1; while (b) { if (b & 1) val = (val * a) % mod; a = (a * a) % mod; b >>= 1; } return val; }
+// https://judge.mcpt.ca/problem/acoinproblem
+
+int N, K, ans;
+int a[MAXN];
+int DP[MAXN];
+
+inline bool Solve (int ind, int sum) {
+	if (sum < 0 || ind >= N) return 0;
+	if (sum == 0) return 1;
+	int &res = DP[sum];
+	if (~res) return res;
+	return res = Solve(ind + 1, sum) || Solve(ind, sum - a[ind]);
+}
 
 int main (int argc, char const *argv[]) {
 	#ifdef NOT_DMOJ
@@ -43,9 +50,17 @@ int main (int argc, char const *argv[]) {
 	cin.sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
-
+	memset(DP, -1, sizeof(DP));
+	cin >> N >> K;
+	for (int i=0; i<N; i++) cin >> a[i];
+	cout << (Solve(0, K) ? "YES" : "NO") << "\n";
 	return 0;
 }
+
+/*
+3 6
+1 4 5
+*/
 
 /* 
  * Look for:

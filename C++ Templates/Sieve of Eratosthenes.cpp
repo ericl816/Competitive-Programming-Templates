@@ -21,22 +21,22 @@ char _;
 using namespace std;
 
 bool prime[MAXN];
-vi primes;
+vector<ll> primes;
 
 // Time Complexity: O(loglog(n))
-void sieve (int n) {
+void sieve (ll n) {
     memset(prime, 1, sizeof(prime));
     prime[1] = 0;
-    for (int i=2; i*i<=n; i++){
+    for (ll i=2; i<=n; i++){
         if (prime[i]) {
-            for (int j=i*i; j<=n; j+=i) prime[j] = 0;
+            for (ll j=i*2; j<=n; j+=i) prime[j] = 0;
         }
     }
 }
 
 int main () {
 	sieve(MAXM);
-	for (int i=1; i<=MAXN; i++) {
+	for (ll i=1; i<=MAXN; i++) {
 		if (prime[i]) primes.pb(i);
 	}
 	for (int i : primes) cout << i << "\n";
