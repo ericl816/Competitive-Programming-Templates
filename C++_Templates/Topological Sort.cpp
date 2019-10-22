@@ -63,10 +63,10 @@ int main (int argc, char const *argv[]) {
 	while (!q.empty()) {
 		int curr = q.front();
 		q.pop();
+		topo.pb(curr);
 		for (auto i : adj[curr]) {
 			if (!(--indeg[i])) q.push(i);
 		}
-		topo.pb(curr);
 	}
 	cout << "Topological sorting: ";
 	for (auto i : topo) D("%d ", i);

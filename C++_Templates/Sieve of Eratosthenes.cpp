@@ -20,7 +20,7 @@ char _;
 #define umii unordered_map<int, int>
 using namespace std;
 
-bool prime[MAXN];
+bool prime[MAXM];
 vector<ll> primes;
 
 // Time Complexity: O(loglog(n))
@@ -30,15 +30,13 @@ void sieve (ll n) {
     for (ll i=2; i<=n; i++){
         if (prime[i]) {
             for (ll j=i*2; j<=n; j+=i) prime[j] = 0;
+            primes.pb(i);
         }
     }
 }
 
 int main () {
 	sieve(MAXM);
-	for (ll i=1; i<=MAXN; i++) {
-		if (prime[i]) primes.pb(i);
-	}
 	for (int i : primes) cout << i << "\n";
 	return 0;
 }
