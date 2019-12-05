@@ -28,19 +28,15 @@ struct node {
 	node *p, *ch[2];
 	node () : sz(1), p(0), ch{0} { }
 } *lct[MAXN];
-
 inline bool par (node *n) {
 	return n->p && (n->p->ch[0] == n || n->p->ch[1] == n);
 }
-
 inline int size (node *n) {
 	return n ? n->sz : 0;
 }
-
 inline void update (node *n) {
 	n->sz = size(n->ch[0]) + size(n->ch[1]) + 1;
 }
-
 inline void rotate (node *n, bool b) {
 	node *p = n->p;
 	p->ch[b ^ 1] = n->ch[b];
@@ -53,7 +49,6 @@ inline void rotate (node *n, bool b) {
 	p->p = n;
 	update(n->ch[b] = p);
 }
-
 inline void splay (node *n) {
 	while (par(n)) {
 		if (par(n->p)) {
