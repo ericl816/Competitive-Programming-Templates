@@ -1,3 +1,3 @@
 # Competitive-Programming-Templates
-An useful collection of templates that I use for Competitive Programming
+An useful collection of templates that anyone can use it  for Competitive Programming.
 
