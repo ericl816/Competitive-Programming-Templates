@@ -1,9 +1,9 @@
 struct Network {
 	struct Edge {
 		ll dest, cost, next;
-		Edge (int dest, int cost, int next) : dest(dest), cost(cost), next(next) { }
+		Edge (int dest, int cost, int next) : dest(dest), cost(cost), next(next) {}
 	};
-
+	
 	int N, src, sink;
 	vector<int> last, dist;
 	vector<Edge> e;
@@ -27,27 +27,31 @@ struct Network {
 		while (!q.empty()) {
 			int curr = q.front();
 			q.pop();
-			for (int i = last[curr]; i != -1; i = e[i].next) {
+			for (int i=last[curr]; ~i; i=e[i].next) {
 				if (e[i].cost > 0 && dist[e[i].dest] == -1) {
 					dist[e[i].dest] = dist[curr] + 1;
 					q.push(e[i].dest);
 				}
 			}
 		}
-		return dist[sink] != -1;
+		return ~dist[sink];
 	}
 
-	ll dfs (int curr, ll flow) {
-		if (curr == sink) return flow;
+	ll DFS (int curr, ll flow) {
+		if (curr == sink) {
+			return flow;
+		}
 		ll ret = 0;
-		for (int i = last[curr]; i != -1; i = e[i].next) {
+		for (int i=last[curr]; ~i; i=e[i].next) {
 			if (e[i].cost > 0 && dist[e[i].dest] == dist[curr] + 1) {
-				int res = dfs(e[i].dest, min(flow, e[i].cost));
+				int res = DFS(e[i].dest, min(flow, e[i].cost));
 				ret += res;
 				e[i].cost -= res;
 				e[i ^ 1].cost += res;
 				flow -= res;
-				if (flow == 0) break;
+				if (flow == 0) {
+					break;
+				}
 			}
 		}
 		return ret;
@@ -55,7 +59,9 @@ struct Network {
 
 	ll getFlow () {
 		ll res = 0;
-		while (getPath()) res += dfs(src, 1LL << 60);
+		while (getPath()) {
+			res += DFS(src, 1LL << 60);
+		}
 		return res;
 	}
 };

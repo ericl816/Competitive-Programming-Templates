@@ -18,7 +18,6 @@ char op;
 
 struct Node {
 	ll l, r, sum, ans, lval, rval;
-	// Note: No need for lazy propagation!
 };
 
 struct Seg {
@@ -48,7 +47,6 @@ public:
 		return next;
 	}
 
-	// Not actually Push_Down since there is no lazy value...
 	void PushDown (int idx, ll val) {
 		tree[idx].sum = tree[idx].ans = tree[idx].lval = tree[idx].rval = val;
 	}
